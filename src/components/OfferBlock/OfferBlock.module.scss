@@ -1,0 +1,39 @@
+.offer-block {
+  background-color: #f4efe9;
+  border-radius: 20px;
+  padding: 50px;
+  margin: 0 0 40px 0;
+  &-text {
+    max-width: 270px;
+    width: 100%;
+  }
+  &__title {
+    font-size: 38px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    &-green {
+      color: #8bb43c;
+    }
+  }
+  &__subtitle {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+  }
+  button {
+    background-color: #8bb43c;
+    border-radius: 110px;
+    padding: 15px 40px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+  }
+}

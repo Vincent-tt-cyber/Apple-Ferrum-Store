@@ -1,0 +1,128 @@
+.card {
+  position: relative;
+  border: 1.5px solid #f3f3f3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px 30px 20px 30px;
+  border-radius: 40px;
+  overflow: hidden;
+  //   box-shadow: 0 14px 30px 0 rgba(0, 0, 0, 0.05);
+  background: #fff;
+  transition: all 0.2s ease;
+  &:hover {
+    // border: 1px solid #f3f3f3;
+    box-shadow: 0 14px 30px 0 rgba(0, 0, 0, 0.05);
+    transform: translate(0, -5px);
+  }
+
+  &-like {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    background-color: #fff;
+    transition: all 0.2s ease;
+    color: #eaeaea;
+    &:hover {
+      color: #ff8585;
+      // background-color: red;
+      // svg {
+      //   fill: red;
+      // }
+    }
+    &-active {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+      background-color: #fef0f0;
+      transition: all 0.2s ease;
+      // color: #fff; ;
+    }
+  }
+  &-image {
+    width: 100%;
+    margin: 0 0 15px 0;
+  }
+  h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    &:hover {
+      color: #9dd458;
+    }
+  }
+
+  &-price {
+    &-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #bdbdbd;
+    }
+    &-value {
+      font-size: 16px;
+      font-weight: 900;
+    }
+  }
+  &-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &-button {
+    border: 2px solid #f2f2f2;
+    background-color: #fff;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    font-size: 25px;
+    font-weight: 500;
+    color: #d3d3d3;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    &:hover {
+      border-color: #9dd458;
+      color: #9dd458;
+    }
+    &-active {
+      background-color: #9dd458;
+      border: 2px solid #9dd458;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+      font-size: 25px;
+      font-weight: 500;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+}
