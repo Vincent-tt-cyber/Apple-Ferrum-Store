@@ -4,11 +4,11 @@ import { MdDone } from "react-icons/md";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 const ProductCard = ({ product }) => {
   const [isAdded, setIsAdded] = React.useState(false);
-  const [isLiked, setIsLiked] = React.useState(true);
+  const [isLiked, setIsLiked] = React.useState(false);
   return (
     <>
       <div className={styles["card"]}>
-        <button
+        <button onClick={() => setIsLiked(!isLiked)}
           className={isLiked ? styles["card-like-active"] : styles["card-like"]}
         >
           {isLiked ? (
@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
               })}
             </p>
           </div>
-          <button
+          <button onClick={() => setIsAdded(!isAdded)}
             className={
               isAdded ? styles["card-button-active"] : styles["card-button"]
             }
