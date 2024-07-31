@@ -19,7 +19,7 @@ function App() {
       imageURL:
         "https://signal-crimea.ru/uploads/product/8900/8944/thumbs/30_d33150dd546b11eebe58f46d04dcc54c_d33150de546b11eebe58f46d04dcc54c.jpg",
       color: "Черный Титан",
-      price: 40000,
+      price: 70000,
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ function App() {
       imageURL:
         "https://signal-crimea.ru/uploads/product/8900/8947/thumbs/30_d33150f2546b11eebe58f46d04dcc54c_d33150f3546b11eebe58f46d04dcc54c.jpg",
       color: "Белый Титан",
-      price: 50000,
+      price: 70000,
     },
     {
       id: 4,
@@ -35,7 +35,7 @@ function App() {
       imageURL:
         "https://signal-crimea.ru/uploads/product/8900/8950/thumbs/30_2df09bc7547011eebe58f46d04dcc54c_2df09bc8547011eebe58f46d04dcc54c.jpg",
       color: "Зеленый Титан",
-      price: 60000,
+      price: 70000,
     },
     {
       id: 5,
@@ -43,18 +43,39 @@ function App() {
       imageURL:
         "https://signal-crimea.ru/uploads/product/8900/8950/thumbs/30_2df09bc7547011eebe58f46d04dcc54c_2df09bc8547011eebe58f46d04dcc54c.jpg",
       color: "Зеленый Титан",
-      price: 60000,
+      price: 70000,
     },
   ];
   return (
     <>
       <div className="wrapper">
+        <div className={["drawer-overlay"]}>
+          <div className="drawer-content">
+            <h2>Корзина</h2>
+            {iPhoneData.map((product) => {
+              return (
+                <div key={product.id} className="cart-item">
+                  <img src={product.imageURL} alt={product.name} />
+                  <div>
+                    <h2>{product.name}</h2>
+                    <b>
+                      {product.price.toLocaleString("ru-RU", {
+                        style: "currency",
+                        currency: "RUB",
+                      })}
+                    </b>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
         <div className="container">
           <Header />
           <OfferBlock />
           <Routes>
             <Route path="/" element={<MainPage data={iPhoneData} />} />
-            <Route path="/cart" element={<h1>Cart pafe</h1>} />
+            <Route path="/cart" element={<h1>Корзина</h1>} />
           </Routes>
         </div>
       </div>

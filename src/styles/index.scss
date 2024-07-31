@@ -28,6 +28,7 @@ body {
   align-items: center;
   // min-height: 100vh;
   padding: 50px;
+  position: relative;
 }
 
 .container {
@@ -37,4 +38,53 @@ body {
   margin: 0 auto;
   border-radius: 50px;
   padding: 50px;
+}
+
+.drawer {
+  &-overlay {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  &-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    max-width: 385px;
+    height: 100%;
+    width: 100%;
+    box-shadow: -10px 4px 24px 0 rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    h2 {
+      font-weight: 700;
+      font-size: 24px;
+      margin: 0 0 30px 0;
+      color: #000;
+    }
+  }
+}
+
+.cart-item {
+  border: 1px solid #f3f3f3;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+
+  h2 {
+    font-weight: 500;
+    font-size: 20px;
+  }
+
+  img {
+    max-width: 70px;
+    // height: 70px;
+    margin-right: 30px;
+  }
 }

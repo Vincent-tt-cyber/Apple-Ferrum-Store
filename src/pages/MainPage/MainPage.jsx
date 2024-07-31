@@ -11,7 +11,7 @@ const MainPage = ({ data }) => {
           <h1 className={styles["main-page-title"]}>Все iPhone</h1>
           <div className={styles["main-page-search"]}>
             <IconsHandler icon="search" />
-            <input className={styles['main-page-input']} type="text" placeholder="Поиск" />
+            <input type="text" placeholder="Поиск" />
           </div>
         </div>
         <div className={styles["main-page-grid"]}>

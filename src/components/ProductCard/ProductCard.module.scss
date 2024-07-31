@@ -78,11 +78,14 @@
     &-title {
       font-size: 16px;
       font-weight: 500;
+      font-size: 14px;
+      text-transform: uppercase;
       color: #bdbdbd;
     }
     &-value {
+      font-weight: 700;
       font-size: 16px;
-      font-weight: 900;
+      color: #000;
     }
   }
   &-footer {
