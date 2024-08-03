@@ -1,7 +1,4 @@
 .drawer-card {
-  img {
-    max-width: 70px;
-  }
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,6 +6,9 @@
   border: 1px solid #f3f3f3;
   border-radius: 20px;
   margin: 0 0 20px 0;
+  img {
+    max-width: 70px;
+  }
   &__title {
     font-weight: 500;
     font-size: 16px;

@@ -6,15 +6,27 @@ const OfferBlock = () => {
   return (
     <>
       <section className={styles["offer-block"]}>
-        <div className={styles["offer-block-text"]}>
-          <h1 className={styles["offer-block__title"]}>
-           <span className={styles['offer-block__title-green']}>AirPods Pro 2</span> в подарок!
-          </h1>
-          <p className={styles["offer-block__subtitle"]}>
-           При первом заказе
-          </p>
+        <div className={styles["offer-block-row"]}>
+          <div>
+            <div className={styles["offer-block-text"]}>
+              <h1 className={styles["offer-block__title"]}>
+                <span className={styles["offer-block__title-green"]}>
+                  AirPods Pro 2
+                </span>{" "}
+                в подарок!
+              </h1>
+              <p className={styles["offer-block__subtitle"]}>
+                При первом заказе
+              </p>
+            </div>
+            <button>Купить</button>
+          </div>
+          <img
+            src="https://static.eldorado.ru/img1/b/bb/08067501.jpg/resize/468x468/"
+            alt=""
+            style={{ borderRadius: 20 }}
+          />
         </div>
-        <button>Купить</button>
       </section>
     </>
   );
