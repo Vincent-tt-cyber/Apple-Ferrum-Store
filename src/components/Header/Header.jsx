@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Header.module.scss";
 import IconsHandler from "../IconsHandler/IconsHandler";
 
-const Header = () => {
+const Header = ({ isOpenDrawer, setIsOpenDrawer }) => {
   return (
     <>
       <header className={styles["header"]}>
@@ -14,7 +14,7 @@ const Header = () => {
             </p>
           </div>
           <ul className={styles["header-nav__list"]}>
-            <li className={styles["header-nav__item"]}>
+            <li onClick={() => setIsOpenDrawer(!isOpenDrawer)} className={styles["header-nav__item"]}>
               <IconsHandler icon="Cart" />
               0 руб.
             </li>

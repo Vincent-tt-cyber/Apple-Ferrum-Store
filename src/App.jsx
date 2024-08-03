@@ -2,8 +2,15 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import MainPage from "./pages/MainPage/MainPage";
 import OfferBlock from "./components/OfferBlock/OfferBlock";
+import React from "react";
+import Drawer from "./components/Drawe/Drawer";
 
 function App() {
+
+  // TODO: https://youtu.be/bfj4lEyc4w8?list=PL0FGkDGJQjJEos_0yVkbKjsQ9zGVy3dG7&t=4441
+
+  const [isOpenDrawer, setIsOpenDrawer] = React.useState(!true);
+
   const iPhoneData = [
     {
       id: 1,
@@ -49,29 +56,9 @@ function App() {
   return (
     <>
       <div className="wrapper">
-        <div className={["drawer-overlay"]}>
-          <div className="drawer-content">
-            <h2>Корзина</h2>
-            {iPhoneData.map((product) => {
-              return (
-                <div key={product.id} className="cart-item">
-                  <img src={product.imageURL} alt={product.name} />
-                  <div>
-                    <h2>{product.name}</h2>
-                    <b>
-                      {product.price.toLocaleString("ru-RU", {
-                        style: "currency",
-                        currency: "RUB",
-                      })}
-                    </b>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        {isOpenDrawer && <Drawer isOpenDrawer={isOpenDrawer} setIsOpenDrawer={setIsOpenDrawer} iPhoneData={iPhoneData} />}
         <div className="container">
-          <Header />
+          <Header isOpenDrawer={isOpenDrawer} setIsOpenDrawer={setIsOpenDrawer} />
           <OfferBlock />
           <Routes>
             <Route path="/" element={<MainPage data={iPhoneData} />} />

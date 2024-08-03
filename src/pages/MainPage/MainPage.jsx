@@ -3,7 +3,6 @@ import styles from "./MainPage.module.scss";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import IconsHandler from "../../components/IconsHandler/IconsHandler";
 const MainPage = ({ data }) => {
-  console.log(data);
   return (
     <>
       <div className={styles["main-page"]}>

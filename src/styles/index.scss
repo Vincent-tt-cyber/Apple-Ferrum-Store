@@ -20,6 +20,7 @@ ul {
 body {
   font-family: "Ubuntu", sans-serif;
   background-color: #e7f6ff;
+  // overflow: hidden;
 }
 
 .wrapper {
@@ -40,33 +41,7 @@ body {
   padding: 50px;
 }
 
-.drawer {
-  &-overlay {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
 
-  &-content {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: #fff;
-    max-width: 385px;
-    height: 100%;
-    width: 100%;
-    box-shadow: -10px 4px 24px 0 rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    h2 {
-      font-weight: 700;
-      font-size: 24px;
-      margin: 0 0 30px 0;
-      color: #000;
-    }
-  }
-}
 
 .cart-item {
   border: 1px solid #f3f3f3;
