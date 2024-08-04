@@ -4,7 +4,7 @@ import DrawerCard from "../DrawerCard/DrawerCard";
 import IconsHandler from "../IconsHandler/IconsHandler";
 import { IoMdClose } from "react-icons/io";
 
-const Drawer = ({ isOpenDrawer, setIsOpenDrawer, iPhoneData }) => {
+const Drawer = ({ isOpenDrawer, setIsOpenDrawer, productsData }) => {
   return (
     <>
       <div className={styles["drawer"]}>
@@ -12,13 +12,16 @@ const Drawer = ({ isOpenDrawer, setIsOpenDrawer, iPhoneData }) => {
           <div>
             <div className={styles["drawer-header"]}>
               <h2 className={styles["drawer__title"]}>Корзина</h2>
-              <button onClick={() => setIsOpenDrawer(!isOpenDrawer)} className={styles["drawer-close"]}>
+              <button
+                onClick={() => setIsOpenDrawer(!isOpenDrawer)}
+                className={styles["drawer-close"]}
+              >
                 <IoMdClose size={18} />
               </button>
             </div>
 
             <div className={styles["drawer__cards"]}>
-              {iPhoneData.map((product) => (
+              {productsData.map((product) => (
                 <div key={product.id}>
                   <DrawerCard product={product} />
                 </div>

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./MainPage.module.scss";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import IconsHandler from "../../components/IconsHandler/IconsHandler";
-const MainPage = ({ data }) => {
+const MainPage = ({ data, handleAddToCard }) => {
   return (
     <>
       <div className={styles["main-page"]}>
@@ -15,7 +15,11 @@ const MainPage = ({ data }) => {
         </div>
         <div className={styles["main-page-grid"]}>
           {data.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              handleAddToCard={handleAddToCard}
+            />
           ))}
         </div>
       </div>
