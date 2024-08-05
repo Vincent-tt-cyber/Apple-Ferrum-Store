@@ -7,23 +7,37 @@ import Drawer from "./components/Drawe/Drawer";
 import axios from "axios";
 function App() {
   // TODO: https://youtu.be/J22CdUt5OOs?list=PL0FGkDGJQjJEos_0yVkbKjsQ9zGVy3dG7&t=91
-  // TODO: Удаление товаров с крзины, Итог стоимсть, схранять данные при обновлении страницы
+  // TODO: Баг с корзиной ID, Роутинг(корзина, закладки)
   // https://mockapi.io/projects/66af55c7b05db47acc5991e4
-
 
   const [isOpenDrawer, setIsOpenDrawer] = React.useState(!true);
   const [iphonesData, setIphonesData] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
 
-  const handleAddToCard = (obj) => {
-    const currntProduct = cartItems.find((item) => item.id === obj.id);
-    if (currntProduct === undefined) {
-      setCartItems((prev) => [...prev, obj]);
+  // Добавление/Удаления из корзины
+  const handleAddToCard = async (obj) => {
+    const currentItem = cartItems.find((item) => item.id === obj.id);
+    // console.log(currentItem);
+    
+    if (currentItem) {
+      await axios.delete(
+        `https://66af55c7b05db47acc5991e3.mockapi.io/Cart/${currentItem.id}`
+      );
+      setCartItems((prev) => prev.filter((obj) => obj.id !== currentItem.id));
+    } else {
+      await axios.post("https://66af55c7b05db47acc5991e3.mockapi.io/Cart", obj);
+      setCartItems([...cartItems, obj]);
     }
-
-    // console.log(currntProduct);
   };
 
+  const deleteItemFromCart = async (id) => {
+    await axios.delete(
+      `https://66af55c7b05db47acc5991e3.mockapi.io/Cart/${id}`
+    );
+    setCartItems((prev) => prev.filter((obj) => obj.id !== id));
+  };
+
+  // Главный запрос на продукты
   const fetchData = async () => {
     const response = await axios
       .get("https://66af55c7b05db47acc5991e3.mockapi.io/iPhonesData")
@@ -31,8 +45,18 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  // Запрос на товары в корзине
+  const fetchCartData = async () => {
+    await axios
+      .get("https://66af55c7b05db47acc5991e3.mockapi.io/Cart")
+      .then((res) => {
+        setCartItems(res.data);
+      });
+  };
+
   React.useEffect(() => {
     fetchData();
+    fetchCartData();
   }, []);
 
   return (
@@ -43,6 +67,7 @@ function App() {
             isOpenDrawer={isOpenDrawer}
             setIsOpenDrawer={setIsOpenDrawer}
             productsData={cartItems}
+            deleteItemFromCart={deleteItemFromCart}
           />
         )}
         <div className="container">
