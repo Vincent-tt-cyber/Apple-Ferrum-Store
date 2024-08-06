@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./MainPage.module.scss";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import IconsHandler from "../../components/IconsHandler/IconsHandler";
@@ -14,6 +14,8 @@ const MainPage = ({ data, handleAddToCard }) => {
   const onClearSearch = () => {
     setSearchValue("");
   };
+
+  // useEffect(() => {}, [handleAddToCard]);
   return (
     <>
       <div className={styles["main-page"]}>
@@ -33,13 +35,17 @@ const MainPage = ({ data, handleAddToCard }) => {
           </div>
         </div>
         <div className={styles["main-page-grid"]}>
-          {data.filter(product => product.name.toLowerCase().includes(searchValue)).map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              handleAddToCard={handleAddToCard}
-            />
-          ))}
+          {data
+            .filter((product) =>
+              product.name.toLowerCase().includes(searchValue)
+            )
+            .map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                handleAddToCard={handleAddToCard}
+              />
+            ))}
         </div>
       </div>
     </>

@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./ProductCard.module.scss";
 import { MdDone } from "react-icons/md";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 const ProductCard = ({ product, handleAddToCard }) => {
   const [isAdded, setIsAdded] = React.useState(false);
   const [isLiked, setIsLiked] = React.useState(false);
-  
+
   const onAddToCart = () => {
     setIsAdded(!isAdded);
     handleAddToCard(product);
   };
+
+  const isHasProduct = (id) => {
+    if (localStorage.getItem("cart")) {
+      const cartProducts = JSON.parse(localStorage.getItem("cart"));
+      // console.log("Procust => ", cartProducts);
+      const isHas = cartProducts.some((product) => product.id === id);
+
+      setIsAdded(isHas);
+    }
+  };
+
+  useEffect(() => {
+    isHasProduct(product.id);
+  }, [handleAddToCard]);
 
   return (
     <>
@@ -29,7 +43,9 @@ const ProductCard = ({ product, handleAddToCard }) => {
           src={product.imageURL}
           alt={product.name}
         />
-        <h3>{product.name}, {product.storage + "ГБ"}</h3>
+        <h3>
+          {product.name}, {product.storage + "ГБ"}
+        </h3>
         {/* <p>{product.color}</p> */}
         <div className={styles["card-footer"]}>
           <div className={styles["card-price"]}>

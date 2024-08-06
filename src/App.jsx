@@ -11,51 +11,91 @@ function App() {
   // https://mockapi.io/projects/66af55c7b05db47acc5991e4
 
   const [isOpenDrawer, setIsOpenDrawer] = React.useState(!true);
-  const [iphonesData, setIphonesData] = React.useState([]);
+  const [iphonesData, setIphonesData] = React.useState([
+    {
+      name: "Apple iPhone 14 Pro",
+      price: 114990,
+      color: "color 1",
+      imageURL:
+        "https://trustereo.ru/upload/resize_cache/iblock/582/bzilgzy9b91wbdsr765up0awc7cc4dku/1000_1000_0/image-1.jpg",
+      storage: 128,
+      id: "1",
+    },
+    {
+      name: "Apple iPhone 13 Pro",
+      price: 89990,
+      color: "color 2",
+      imageURL:
+        "https://trustereo.ru/upload/resize_cache/iblock/e2a/9fxr0kmzymzdakqckrjfapx6d10bpayd/1000_1000_0/image-1.jpg",
+      storage: 128,
+      id: "2",
+    },
+    {
+      name: "Apple iPhone 14",
+      price: 79990,
+      color: "color 3",
+      imageURL:
+        "https://trustereo.ru/upload/resize_cache/iblock/5af/jxvqaaiopxtaw98la1hhgyub3wdvaoa7/1000_1000_0/image-1.jpg",
+      storage: 256,
+      id: "3",
+    },
+    {
+      name: "Apple iPhone 13",
+      price: 71990,
+      color: "color 4",
+      imageURL:
+        "https://trustereo.ru/upload/resize_cache/iblock/f50/p94luhfix8mibf0remph3ggl2gjal5if/1000_1000_0/image-1.jpg",
+      storage: 256,
+      id: "4",
+    },
+    {
+      name: "Apple iPhone 12",
+      price: 60990,
+      color: "color 5",
+      imageURL:
+        "https://trustereo.ru/upload/resize_cache/iblock/c50/jphk2qs14hji5hjpia5twrdkfxi59h9o/1000_1000_0/image-1.jpg",
+      storage: 64,
+      id: "5",
+    },
+    {
+      name: "Apple iPhone 12 Pro Max",
+      price: 92990,
+      color: "color 5",
+      imageURL:
+        "https://trustereo.ru/upload/iblock/82b/iacimopswutmgstdc2i3cniwq3zllfcr/image-1.jpeg",
+      storage: 128,
+      id: "6",
+    },
+  ]);
   const [cartItems, setCartItems] = React.useState([]);
 
   // Добавление/Удаления из корзины
   const handleAddToCard = async (obj) => {
-    const currentItem = cartItems.find((item) => item.id === obj.id);
-    // console.log(currentItem);
-    
+    const currentItem = cartItems.find((cartItem) => cartItem.id === obj.id);
+    const removeItem = cartItems.filter((cartItem) => cartItem.id !== obj.id);
     if (currentItem) {
-      await axios.delete(
-        `https://66af55c7b05db47acc5991e3.mockapi.io/Cart/${currentItem.id}`
-      );
-      setCartItems((prev) => prev.filter((obj) => obj.id !== currentItem.id));
+      setCartItems(removeItem);
+      localStorage.setItem("cart", JSON.stringify(removeItem));
     } else {
-      await axios.post("https://66af55c7b05db47acc5991e3.mockapi.io/Cart", obj);
       setCartItems([...cartItems, obj]);
+      localStorage.setItem("cart", JSON.stringify([...cartItems, obj]));
     }
   };
 
   const deleteItemFromCart = async (id) => {
-    await axios.delete(
-      `https://66af55c7b05db47acc5991e3.mockapi.io/Cart/${id}`
-    );
-    setCartItems((prev) => prev.filter((obj) => obj.id !== id));
-  };
-
-  // Главный запрос на продукты
-  const fetchData = async () => {
-    const response = await axios
-      .get("https://66af55c7b05db47acc5991e3.mockapi.io/iPhonesData")
-      .then(({ data }) => setIphonesData(data))
-      .catch((err) => console.log(err));
+    setCartItems(cartItems.filter((item) => item.id !== id));
+    localStorage.setItem("cart", JSON.stringify(cartItems.filter((item) => item.id !== id)));
   };
 
   // Запрос на товары в корзине
   const fetchCartData = async () => {
-    await axios
-      .get("https://66af55c7b05db47acc5991e3.mockapi.io/Cart")
-      .then((res) => {
-        setCartItems(res.data);
-      });
+    if (localStorage.getItem("cart")) {
+      // console.log("cart => ", JSON.parse(localStorage.getItem("cart")));
+      setCartItems(JSON.parse(localStorage.getItem("cart")));
+    }
   };
 
   React.useEffect(() => {
-    fetchData();
     fetchCartData();
   }, []);
 
@@ -83,6 +123,7 @@ function App() {
                 <MainPage
                   data={iphonesData}
                   handleAddToCard={handleAddToCard}
+                  fetchCartData={fetchCartData}
                 />
               }
             />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Drawer.module.scss";
 import DrawerCard from "../DrawerCard/DrawerCard";
 import IconsHandler from "../IconsHandler/IconsHandler";
@@ -11,6 +11,7 @@ const Drawer = ({
   productsData,
   deleteItemFromCart,
 }) => {
+  useEffect(() => {}, [deleteItemFromCart]);
   return (
     <>
       <div className={styles["drawer"]}>
@@ -37,7 +38,7 @@ const Drawer = ({
           </div>
           {productsData.length === 0 && (
             <div className={styles["drawer__empty"]}>
-              <img src={BOXimage} alt="BOX" srcset="" />
+              <img src={BOXimage} alt="BOX" />
               <h2>Корзина пуста</h2>
               <p>Добавьте хотя бы один товар</p>
             </div>
