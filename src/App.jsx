@@ -6,8 +6,8 @@ import React from "react";
 import Drawer from "./components/Drawe/Drawer";
 import axios from "axios";
 function App() {
-  // TODO: https://youtu.be/J22CdUt5OOs?list=PL0FGkDGJQjJEos_0yVkbKjsQ9zGVy3dG7&t=91
-  // TODO: Баг с корзиной ID, Роутинг(корзина, закладки)
+  // FIXME: https://youtu.be/2jLFTiytfgg?list=PL0FGkDGJQjJEos_0yVkbKjsQ9zGVy3dG7&t=1791
+  // TODO: Роутинг( закладки) создать логику для добавления товара в закладки
   // https://mockapi.io/projects/66af55c7b05db47acc5991e4
 
   const [isOpenDrawer, setIsOpenDrawer] = React.useState(!true);
@@ -84,7 +84,10 @@ function App() {
 
   const deleteItemFromCart = async (id) => {
     setCartItems(cartItems.filter((item) => item.id !== id));
-    localStorage.setItem("cart", JSON.stringify(cartItems.filter((item) => item.id !== id)));
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(cartItems.filter((item) => item.id !== id))
+    );
   };
 
   // Запрос на товары в корзине
