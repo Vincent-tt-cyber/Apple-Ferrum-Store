@@ -63,3 +63,9 @@ body {
     margin-right: 30px;
   }
 }
+
+@media(max-width: 620px) {
+  .container {
+    padding: 20px;
+  }
+}

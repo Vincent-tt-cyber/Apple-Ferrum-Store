@@ -2,9 +2,18 @@ import React, { useEffect } from "react";
 import styles from "./ProductCard.module.scss";
 import { MdDone } from "react-icons/md";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-const ProductCard = ({ product, handleAddToCard }) => {
+const ProductCard = ({ product, handleAddToCard, handleAddToFavourite }) => {
   const [isAdded, setIsAdded] = React.useState(false);
   const [isLiked, setIsLiked] = React.useState(false);
+
+  // console.log("Продукт из страницы КОРЗИНА => ", product);
+
+  const onAddToFavourite = (product) => {
+    // console.log("onAddToFavourite", product);
+    
+    setIsLiked(!isLiked);
+    handleAddToFavourite(product);
+  };
 
   const onAddToCart = () => {
     setIsAdded(!isAdded);
@@ -21,15 +30,25 @@ const ProductCard = ({ product, handleAddToCard }) => {
     }
   };
 
+  const isHasProductFavourite = (id) => {
+    if (localStorage.getItem("favourite")) {
+      const favouriteProducts = JSON.parse(localStorage.getItem("favourite"));
+      const isHas = favouriteProducts.some((product) => product.id === id);
+      // console.log("isHas", isHas);
+      setIsLiked(isHas);
+    }
+  };
+
   useEffect(() => {
     isHasProduct(product.id);
-  }, [handleAddToCard]);
+    isHasProductFavourite(product.id);
+  }, [handleAddToCard, handleAddToFavourite]);
 
   return (
     <>
       <div className={styles["card"]}>
         <button
-          onClick={() => setIsLiked(!isLiked)}
+          onClick={() => onAddToFavourite(product)}
           className={isLiked ? styles["card-like-active"] : styles["card-like"]}
         >
           {isLiked ? (

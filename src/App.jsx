@@ -5,9 +5,11 @@ import OfferBlock from "./components/OfferBlock/OfferBlock";
 import React from "react";
 import Drawer from "./components/Drawe/Drawer";
 import axios from "axios";
+import CartPage from "./pages/CartPage/CartPage";
+import FavouritePage from "./pages/FavouritePage/FavouritePage";
 function App() {
   // FIXME: https://youtu.be/2jLFTiytfgg?list=PL0FGkDGJQjJEos_0yVkbKjsQ9zGVy3dG7&t=1791
-  // TODO: Роутинг( закладки) создать логику для добавления товара в закладки
+  // TODO: адаптировать проект под телефоны
   // https://mockapi.io/projects/66af55c7b05db47acc5991e4
 
   const [isOpenDrawer, setIsOpenDrawer] = React.useState(!true);
@@ -68,11 +70,13 @@ function App() {
     },
   ]);
   const [cartItems, setCartItems] = React.useState([]);
+  const [favouriteItems, setFavouriteItems] = React.useState([]);
 
   // Добавление/Удаления из корзины
   const handleAddToCard = async (obj) => {
     const currentItem = cartItems.find((cartItem) => cartItem.id === obj.id);
     const removeItem = cartItems.filter((cartItem) => cartItem.id !== obj.id);
+
     if (currentItem) {
       setCartItems(removeItem);
       localStorage.setItem("cart", JSON.stringify(removeItem));
@@ -98,8 +102,34 @@ function App() {
     }
   };
 
+  // FIXME: Логика добавления в избранное
+
+  const handleAddToFavourite = (obj) => {
+    const currentItem = favouriteItems.find(
+      (favouriteItem) => favouriteItem.id === obj.id
+    );
+    const removeItem = favouriteItems.filter((item) => item.id !== obj.id);
+    if (currentItem) {
+      setFavouriteItems(removeItem);
+      localStorage.setItem("favourite", JSON.stringify(removeItem));
+    } else {
+      setFavouriteItems([...favouriteItems, obj]);
+      localStorage.setItem(
+        "favourite",
+        JSON.stringify([...favouriteItems, obj])
+      );
+    }
+  };
+
+  const fetchFavouriteData = async () => {
+    if (localStorage.getItem("favourite")) {
+      setFavouriteItems(JSON.parse(localStorage.getItem("favourite")));
+    }
+  };
+
   React.useEffect(() => {
     fetchCartData();
+    fetchFavouriteData();
   }, []);
 
   return (
@@ -118,7 +148,6 @@ function App() {
             isOpenDrawer={isOpenDrawer}
             setIsOpenDrawer={setIsOpenDrawer}
           />
-          <OfferBlock />
           <Routes>
             <Route
               path="/"
@@ -126,11 +155,33 @@ function App() {
                 <MainPage
                   data={iphonesData}
                   handleAddToCard={handleAddToCard}
+                  handleAddToFavourite={handleAddToFavourite}
                   fetchCartData={fetchCartData}
                 />
               }
             />
-            <Route path="/cart" element={<h1>Корзина</h1>} />
+            <Route
+              path="/favourite"
+              element={
+                <FavouritePage
+                  favouriteItems={favouriteItems}
+                  handleAddToFavourite={handleAddToFavourite}
+                  handleAddToCard={handleAddToCard}
+                />
+              }
+            />
+            <Route
+              path="/cart"
+              element={
+                <CartPage
+                  handleAddToCard={handleAddToCard}
+                  fetchCartData={fetchCartData}
+                  fetchFavouriteData={fetchFavouriteData}
+                  handleAddToFavourite={handleAddToFavourite}
+                  cartItems={cartItems}
+                />
+              }
+            />
           </Routes>
         </div>
       </div>

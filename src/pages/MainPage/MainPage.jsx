@@ -3,7 +3,8 @@ import styles from "./MainPage.module.scss";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import IconsHandler from "../../components/IconsHandler/IconsHandler";
 import { IoMdClose } from "react-icons/io";
-const MainPage = ({ data, handleAddToCard }) => {
+import OfferBlock from "../../components/OfferBlock/OfferBlock";
+const MainPage = ({ data, handleAddToCard, handleAddToFavourite }) => {
   const [searchValue, setSearchValue] = React.useState("");
 
   const onChangeSearchInput = (event) => {
@@ -18,11 +19,10 @@ const MainPage = ({ data, handleAddToCard }) => {
   // useEffect(() => {}, [handleAddToCard]);
   return (
     <>
+      {/* <OfferBlock /> */}
       <div className={styles["main-page"]}>
         <div className={styles["main-page-header"]}>
-          <h1 className={styles["main-page-title"]}>
-            {searchValue ? `Поиск по запросу: ${searchValue}` : "Все iPhone"}
-          </h1>
+          <h1 className={styles["main-page-title"]}>Все iPhone</h1>
           <div className={styles["main-page-search"]}>
             <IconsHandler icon="search" />
             <input
@@ -44,6 +44,7 @@ const MainPage = ({ data, handleAddToCard }) => {
                 key={product.id}
                 product={product}
                 handleAddToCard={handleAddToCard}
+                handleAddToFavourite={handleAddToFavourite}
               />
             ))}
         </div>

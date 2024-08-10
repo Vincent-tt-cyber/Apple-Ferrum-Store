@@ -4,6 +4,7 @@ import DrawerCard from "../DrawerCard/DrawerCard";
 import IconsHandler from "../IconsHandler/IconsHandler";
 import { IoMdClose } from "react-icons/io";
 import BOXimage from "../../assets/images/box.jpg";
+import { Link } from "react-router-dom";
 
 const Drawer = ({
   isOpenDrawer,
@@ -11,7 +12,6 @@ const Drawer = ({
   productsData,
   deleteItemFromCart,
 }) => {
-  useEffect(() => {}, [deleteItemFromCart]);
   return (
     <>
       <div className={styles["drawer"]}>
@@ -56,9 +56,13 @@ const Drawer = ({
                     <b>1074 руб.</b>
                   </li>
                 </ul>
-                <button className={styles["drawer__button"]}>
+                <Link
+                  to="/cart"
+                  onClick={() => setIsOpenDrawer(!isOpenDrawer)}
+                  className={styles["drawer__button"]}
+                >
                   Оформить <IconsHandler icon={"arrow-right"} />
-                </button>
+                </Link>
               </>
             )}
           </div>

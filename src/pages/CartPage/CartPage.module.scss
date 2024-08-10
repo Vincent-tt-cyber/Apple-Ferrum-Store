@@ -1,0 +1,16 @@
+.cart-page {
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(auto, 1fr);
+    gap: 40px;
+    margin: 20px 0;
+  }
+  &__empty {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+}
