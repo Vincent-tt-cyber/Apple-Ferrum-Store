@@ -4,7 +4,7 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import IconsHandler from "../../components/IconsHandler/IconsHandler";
 import { IoMdClose } from "react-icons/io";
 import OfferBlock from "../../components/OfferBlock/OfferBlock";
-const MainPage = ({ data, handleAddToCard, handleAddToFavourite }) => {
+const MainPage = ({ data, handleAddToCard, handleAddToFavourite, isLoading }) => {
   const [searchValue, setSearchValue] = React.useState("");
 
   const onChangeSearchInput = (event) => {
@@ -45,6 +45,7 @@ const MainPage = ({ data, handleAddToCard, handleAddToFavourite }) => {
                 product={product}
                 handleAddToCard={handleAddToCard}
                 handleAddToFavourite={handleAddToFavourite}
+                isLoading={isLoading}
               />
             ))}
         </div>

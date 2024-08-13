@@ -7,6 +7,7 @@ import Drawer from "./components/Drawe/Drawer";
 import axios from "axios";
 import CartPage from "./pages/CartPage/CartPage";
 import FavouritePage from "./pages/FavouritePage/FavouritePage";
+import PoductPage from "./pages/ProductPage/PoductPage";
 function App() {
   // FIXME: https://youtu.be/2jLFTiytfgg?list=PL0FGkDGJQjJEos_0yVkbKjsQ9zGVy3dG7&t=1791
   // TODO: адаптировать проект под телефоны
@@ -71,6 +72,7 @@ function App() {
   ]);
   const [cartItems, setCartItems] = React.useState([]);
   const [favouriteItems, setFavouriteItems] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false)
 
   // Добавление/Удаления из корзины
   const handleAddToCard = async (obj) => {
@@ -79,16 +81,16 @@ function App() {
 
     if (currentItem) {
       setCartItems(removeItem);
-      localStorage.setItem("cart", JSON.stringify(removeItem));
+      await localStorage.setItem("cart", JSON.stringify(removeItem));
     } else {
       setCartItems([...cartItems, obj]);
-      localStorage.setItem("cart", JSON.stringify([...cartItems, obj]));
+      await localStorage.setItem("cart", JSON.stringify([...cartItems, obj]));
     }
   };
 
   const deleteItemFromCart = async (id) => {
     setCartItems(cartItems.filter((item) => item.id !== id));
-    localStorage.setItem(
+    await localStorage.setItem(
       "cart",
       JSON.stringify(cartItems.filter((item) => item.id !== id))
     );
@@ -98,23 +100,25 @@ function App() {
   const fetchCartData = async () => {
     if (localStorage.getItem("cart")) {
       // console.log("cart => ", JSON.parse(localStorage.getItem("cart")));
-      setCartItems(JSON.parse(localStorage.getItem("cart")));
+      setIsLoading(true)
+      await setCartItems(JSON.parse(localStorage.getItem("cart")));
+      setIsLoading(false)
     }
   };
 
   // FIXME: Логика добавления в избранное
 
-  const handleAddToFavourite = (obj) => {
+  const handleAddToFavourite = async (obj) => {
     const currentItem = favouriteItems.find(
       (favouriteItem) => favouriteItem.id === obj.id
     );
     const removeItem = favouriteItems.filter((item) => item.id !== obj.id);
     if (currentItem) {
       setFavouriteItems(removeItem);
-      localStorage.setItem("favourite", JSON.stringify(removeItem));
+      await localStorage.setItem("favourite", JSON.stringify(removeItem));
     } else {
       setFavouriteItems([...favouriteItems, obj]);
-      localStorage.setItem(
+      await localStorage.setItem(
         "favourite",
         JSON.stringify([...favouriteItems, obj])
       );
@@ -123,7 +127,9 @@ function App() {
 
   const fetchFavouriteData = async () => {
     if (localStorage.getItem("favourite")) {
-      setFavouriteItems(JSON.parse(localStorage.getItem("favourite")));
+      setIsLoading(true)
+      await setFavouriteItems(JSON.parse(localStorage.getItem("favourite")));
+      setIsLoading(false)
     }
   };
 
@@ -157,6 +163,7 @@ function App() {
                   handleAddToCard={handleAddToCard}
                   handleAddToFavourite={handleAddToFavourite}
                   fetchCartData={fetchCartData}
+                  isLoading={isLoading}
                 />
               }
             />
@@ -182,6 +189,7 @@ function App() {
                 />
               }
             />
+            <Route path="/product/:id" element={<PoductPage />} />
           </Routes>
         </div>
       </div>
