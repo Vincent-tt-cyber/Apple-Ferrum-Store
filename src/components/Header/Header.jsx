@@ -19,7 +19,7 @@ const Header = ({ isOpenDrawer, setIsOpenDrawer }) => {
               onClick={() => setIsOpenDrawer(!isOpenDrawer)}
               className={styles["header-nav__item"]}
             >
-              <IconsHandler icon="Cart" />0 руб.
+              <IconsHandler icon="Cart" />89 990 руб.
             </li>
             <li className={styles["header-nav__item"]}>
               <Link to="/favourite">

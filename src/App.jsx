@@ -8,10 +8,12 @@ import axios from "axios";
 import CartPage from "./pages/CartPage/CartPage";
 import FavouritePage from "./pages/FavouritePage/FavouritePage";
 import PoductPage from "./pages/ProductPage/PoductPage";
+
+export const AppContext = React.createContext({});
+
 function App() {
-  // FIXME: https://youtu.be/2jLFTiytfgg?list=PL0FGkDGJQjJEos_0yVkbKjsQ9zGVy3dG7&t=1791
+  // FIXME: https://youtu.be/2jLFTiytfgg?list=PL0FGkDGJQjJEos_0yVkbKjsQ9zGVy3dG7&t=6402
   // TODO: адаптировать проект под телефоны
-  // https://mockapi.io/projects/66af55c7b05db47acc5991e4
 
   const [isOpenDrawer, setIsOpenDrawer] = React.useState(!true);
   const [iphonesData, setIphonesData] = React.useState([
@@ -72,7 +74,7 @@ function App() {
   ]);
   const [cartItems, setCartItems] = React.useState([]);
   const [favouriteItems, setFavouriteItems] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(false);
 
   // Добавление/Удаления из корзины
   const handleAddToCard = async (obj) => {
@@ -100,9 +102,9 @@ function App() {
   const fetchCartData = async () => {
     if (localStorage.getItem("cart")) {
       // console.log("cart => ", JSON.parse(localStorage.getItem("cart")));
-      setIsLoading(true)
+      setIsLoading(true);
       await setCartItems(JSON.parse(localStorage.getItem("cart")));
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
 
@@ -127,72 +129,82 @@ function App() {
 
   const fetchFavouriteData = async () => {
     if (localStorage.getItem("favourite")) {
-      setIsLoading(true)
+      setIsLoading(true);
       await setFavouriteItems(JSON.parse(localStorage.getItem("favourite")));
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
 
   React.useEffect(() => {
     fetchCartData();
     fetchFavouriteData();
-  }, []);
+
+    if (isOpenDrawer) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpenDrawer]);
 
   return (
     <>
-      <div className="wrapper">
-        {isOpenDrawer && (
-          <Drawer
-            isOpenDrawer={isOpenDrawer}
-            setIsOpenDrawer={setIsOpenDrawer}
-            productsData={cartItems}
-            deleteItemFromCart={deleteItemFromCart}
-          />
-        )}
-        <div className="container">
-          <Header
-            isOpenDrawer={isOpenDrawer}
-            setIsOpenDrawer={setIsOpenDrawer}
-          />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <MainPage
-                  data={iphonesData}
-                  handleAddToCard={handleAddToCard}
-                  handleAddToFavourite={handleAddToFavourite}
-                  fetchCartData={fetchCartData}
-                  isLoading={isLoading}
-                />
-              }
+      <AppContext.Provider
+        value={{ iphonesData, cartItems, cartItems, favouriteItems }}
+      >
+        <div className="wrapper">
+          {isOpenDrawer && (
+            <Drawer
+              isOpenDrawer={isOpenDrawer}
+              setIsOpenDrawer={setIsOpenDrawer}
+              productsData={cartItems}
+              deleteItemFromCart={deleteItemFromCart}
             />
-            <Route
-              path="/favourite"
-              element={
-                <FavouritePage
-                  favouriteItems={favouriteItems}
-                  handleAddToFavourite={handleAddToFavourite}
-                  handleAddToCard={handleAddToCard}
-                />
-              }
+          )}
+          <div className="container">
+            <Header
+              isOpenDrawer={isOpenDrawer}
+              setIsOpenDrawer={setIsOpenDrawer}
             />
-            <Route
-              path="/cart"
-              element={
-                <CartPage
-                  handleAddToCard={handleAddToCard}
-                  fetchCartData={fetchCartData}
-                  fetchFavouriteData={fetchFavouriteData}
-                  handleAddToFavourite={handleAddToFavourite}
-                  cartItems={cartItems}
-                />
-              }
-            />
-            <Route path="/product/:id" element={<PoductPage />} />
-          </Routes>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <MainPage
+                    data={iphonesData}
+                    handleAddToCard={handleAddToCard}
+                    handleAddToFavourite={handleAddToFavourite}
+                    fetchCartData={fetchCartData}
+                    isLoading={isLoading}
+                  />
+                }
+              />
+              <Route
+                path="/favourite"
+                element={
+                  <FavouritePage
+                    // favouriteItems={favouriteItems}
+                    handleAddToFavourite={handleAddToFavourite}
+                    handleAddToCard={handleAddToCard}
+                  />
+                }
+              />
+              <Route
+                path="/cart"
+                element={
+                  <CartPage
+                    handleAddToCard={handleAddToCard}
+                    fetchCartData={fetchCartData}
+                    fetchFavouriteData={fetchFavouriteData}
+                    handleAddToFavourite={handleAddToFavourite}
+                    cartItems={cartItems}
+                  />
+                }
+              />
+              <Route path="/product/:id" element={<PoductPage />} />
+            </Routes>
+          </div>
         </div>
-      </div>
+      </AppContext.Provider>
     </>
   );
 }

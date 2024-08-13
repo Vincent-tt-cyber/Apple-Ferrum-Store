@@ -4,7 +4,9 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import IconsHandler from "../../components/IconsHandler/IconsHandler";
 import { IoMdClose } from "react-icons/io";
 import OfferBlock from "../../components/OfferBlock/OfferBlock";
-const MainPage = ({ data, handleAddToCard, handleAddToFavourite, isLoading }) => {
+import { AppContext } from "../../App";
+const MainPage = ({ handleAddToCard, handleAddToFavourite, isLoading }) => {
+  const { iphonesData } = React.useContext(AppContext);
   const [searchValue, setSearchValue] = React.useState("");
 
   const onChangeSearchInput = (event) => {
@@ -35,7 +37,7 @@ const MainPage = ({ data, handleAddToCard, handleAddToFavourite, isLoading }) =>
           </div>
         </div>
         <div className={styles["main-page-grid"]}>
-          {data
+          {iphonesData
             .filter((product) =>
               product.name.toLowerCase().includes(searchValue)
             )

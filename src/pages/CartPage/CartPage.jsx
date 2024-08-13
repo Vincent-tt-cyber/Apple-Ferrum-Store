@@ -6,7 +6,11 @@ const CartPage = ({ cartItems, handleAddToCard, handleAddToFavourite }) => {
   return (
     <>
       <div className={styles["cart-page"]}>
-        <h1>{cartItems ? `Корзина (${cartItems.length})` : "Корзина пуста"}</h1>
+      <div>
+          <h1>
+            Товары в корзине {cartItems.length ? `(${cartItems.length})` : ""}
+          </h1>
+        </div>
         <div className={styles["cart-page__content"]}>
           {cartItems.length
             ? cartItems.map((product) => (
