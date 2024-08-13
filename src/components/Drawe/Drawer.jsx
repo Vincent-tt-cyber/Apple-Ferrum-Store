@@ -5,13 +5,13 @@ import IconsHandler from "../IconsHandler/IconsHandler";
 import { IoMdClose } from "react-icons/io";
 import BOXimage from "../../assets/images/box.jpg";
 import { Link } from "react-router-dom";
+import { AppContext } from "../../App";
 
-const Drawer = ({
-  isOpenDrawer,
-  setIsOpenDrawer,
-  productsData,
-  deleteItemFromCart,
-}) => {
+const Drawer = ({ isOpenDrawer, setIsOpenDrawer, deleteItemFromCart }) => {
+  const { cartItems } = React.useContext(AppContext);
+  const totalPrice = cartItems.reduce((sum, item) => item.price + sum, 0);
+  const totalNalog = (totalPrice / 100) * 5;
+
   return (
     <>
       <div className={styles["drawer"]}>
@@ -27,7 +27,7 @@ const Drawer = ({
               </button>
             </div>
             <div className={styles["drawer__cards"]}>
-              {productsData.map((product) => (
+              {cartItems.map((product) => (
                 <DrawerCard
                   key={product.id}
                   product={product}
@@ -36,7 +36,7 @@ const Drawer = ({
               ))}
             </div>
           </div>
-          {productsData.length === 0 && (
+          {cartItems.length === 0 && (
             <div className={styles["drawer__empty"]}>
               <img src={BOXimage} alt="BOX" />
               <h2>Корзина пуста</h2>
@@ -44,16 +44,27 @@ const Drawer = ({
             </div>
           )}
           <div>
-            {productsData.length > 0 && (
+            {cartItems.length > 0 && (
               <>
                 <ul className={styles["drawer__total"]}>
                   <li>
                     <span>Итого: </span>
-                    <b>21 498 руб.</b>
+                    <b>
+                      {totalPrice.toLocaleString("ru-RU", {
+                        style: "currency",
+                        currency: "RUB",
+                      })}
+                      .
+                    </b>
                   </li>
                   <li>
                     <span>Налог 5%: </span>
-                    <b>1074 руб.</b>
+                    <b>
+                      {totalNalog.toLocaleString("ru-RU", {
+                        style: "currency",
+                        currency: "RUB",
+                      })}
+                    </b>
                   </li>
                 </ul>
                 <Link

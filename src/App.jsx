@@ -76,6 +76,7 @@ function App() {
   const [favouriteItems, setFavouriteItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
+  
   // Добавление/Удаления из корзины
   const handleAddToCard = async (obj) => {
     const currentItem = cartItems.find((cartItem) => cartItem.id === obj.id);
@@ -101,8 +102,6 @@ function App() {
   // Запрос на товары в корзине
   const fetchCartData = async () => {
     if (localStorage.getItem("cart")) {
-      // console.log("cart => ", JSON.parse(localStorage.getItem("cart")));
-      setIsLoading(true);
       await setCartItems(JSON.parse(localStorage.getItem("cart")));
       setIsLoading(false);
     }
@@ -129,13 +128,13 @@ function App() {
 
   const fetchFavouriteData = async () => {
     if (localStorage.getItem("favourite")) {
-      setIsLoading(true);
       await setFavouriteItems(JSON.parse(localStorage.getItem("favourite")));
       setIsLoading(false);
     }
   };
 
   React.useEffect(() => {
+    setIsLoading(true);
     fetchCartData();
     fetchFavouriteData();
 
@@ -148,15 +147,12 @@ function App() {
 
   return (
     <>
-      <AppContext.Provider
-        value={{ iphonesData, cartItems, cartItems, favouriteItems }}
-      >
+      <AppContext.Provider value={{ iphonesData, cartItems, favouriteItems }}>
         <div className="wrapper">
           {isOpenDrawer && (
             <Drawer
               isOpenDrawer={isOpenDrawer}
               setIsOpenDrawer={setIsOpenDrawer}
-              productsData={cartItems}
               deleteItemFromCart={deleteItemFromCart}
             />
           )}
@@ -170,7 +166,6 @@ function App() {
                 path="/"
                 element={
                   <MainPage
-                    data={iphonesData}
                     handleAddToCard={handleAddToCard}
                     handleAddToFavourite={handleAddToFavourite}
                     fetchCartData={fetchCartData}

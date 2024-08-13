@@ -2,8 +2,13 @@ import React from "react";
 import styles from "./Header.module.scss";
 import IconsHandler from "../IconsHandler/IconsHandler";
 import { Link } from "react-router-dom";
+import { AppContext } from "../../App";
 
 const Header = ({ isOpenDrawer, setIsOpenDrawer }) => {
+  const { cartItems } = React.useContext(AppContext);
+
+  const totalPrice = cartItems.reduce((sum, item) => item.price + sum, 0);
+
   return (
     <>
       <header className={styles["header"]}>
@@ -19,7 +24,8 @@ const Header = ({ isOpenDrawer, setIsOpenDrawer }) => {
               onClick={() => setIsOpenDrawer(!isOpenDrawer)}
               className={styles["header-nav__item"]}
             >
-              <IconsHandler icon="Cart" />89 990 руб.
+              <IconsHandler icon="Cart" />
+              {totalPrice.toLocaleString("ru-RU", {style: "currency",currency: "RUB",})}
             </li>
             <li className={styles["header-nav__item"]}>
               <Link to="/favourite">
