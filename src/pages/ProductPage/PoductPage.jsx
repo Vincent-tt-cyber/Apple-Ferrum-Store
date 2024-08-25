@@ -32,9 +32,14 @@ const ProductPage = () => {
                           <img src={product.imageURL[0]} alt={product.name} />
                         </div>
                       </div>
-
                       <div className={styles["product-page__info"]}>
-                        <h1>{product.name}</h1>
+                        <h1>Модель: {product.name}</h1>
+                        <p>Цвет: {product.color}</p>
+                        <p>Объем памяти: {product.storage}GB</p>
+                        <div className={styles["product-page__info-price"]}>
+                          <p>Цена: {product.price}</p>
+                          <p></p>
+                        </div>
                       </div>
                     </div>
                   </div>

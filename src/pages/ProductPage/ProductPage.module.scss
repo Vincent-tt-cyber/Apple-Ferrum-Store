@@ -3,11 +3,8 @@
     display: flex;
     justify-content: space-between;
   }
-  &__slider {
-    display: flex;
-    max-width: 500px;
-  }
   &__gallery {
+    // background-color: #000;
     display: flex;
     // justify-content: space-between;
     align-items: center;
@@ -28,9 +25,18 @@
       }
     }
     &-main-image {
+      // background-color: #ccc;
       img {
-        width: 500px;
+        width: 350px;
+        height: 100%;
+        object-fit: cover;
       }
     }
+  }
+  &__info {
+    background-color: rgba(204, 204, 204, 0.21);
+    border-radius: 30px;
+    padding: 20px 30px;
+    text-align-last: left;
   }
 }
