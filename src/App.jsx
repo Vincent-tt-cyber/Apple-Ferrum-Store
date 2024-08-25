@@ -8,6 +8,7 @@ import axios from "axios";
 import CartPage from "./pages/CartPage/CartPage";
 import FavouritePage from "./pages/FavouritePage/FavouritePage";
 import PoductPage from "./pages/ProductPage/PoductPage";
+import ProductPage from "./pages/ProductPage/PoductPage";
 
 export const AppContext = React.createContext({});
 
@@ -18,65 +19,88 @@ function App() {
   const [isOpenDrawer, setIsOpenDrawer] = React.useState(!true);
   const [iphonesData, setIphonesData] = React.useState([
     {
-      name: "Apple iPhone 14 Pro",
-      price: 114990,
-      color: "color 1",
-      imageURL:
-        "https://trustereo.ru/upload/resize_cache/iblock/582/bzilgzy9b91wbdsr765up0awc7cc4dku/1000_1000_0/image-1.jpg",
-      storage: 128,
-      id: "1",
-    },
-    {
-      name: "Apple iPhone 13 Pro",
-      price: 89990,
-      color: "color 2",
-      imageURL:
-        "https://trustereo.ru/upload/resize_cache/iblock/e2a/9fxr0kmzymzdakqckrjfapx6d10bpayd/1000_1000_0/image-1.jpg",
-      storage: 128,
-      id: "2",
-    },
-    {
+      id: 1,
       name: "Apple iPhone 14",
       price: 79990,
-      color: "color 3",
-      imageURL:
+      color: "Голубой",
+      imageURL: [
         "https://trustereo.ru/upload/resize_cache/iblock/5af/jxvqaaiopxtaw98la1hhgyub3wdvaoa7/1000_1000_0/image-1.jpg",
-      storage: 256,
-      id: "3",
+        "https://trustereo.ru/upload/resize_cache/iblock/d3a/os8gb6n2tkhzl41ihrls9gcl2r2ff7yq/1000_1000_0/image-2.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/691/4adavpueoguobupsi31qgomphcwvnedz/1000_1000_0/image-3.jpg",
+      ],
+      storage: 128,
     },
     {
+      id: 2,
+      name: "Apple iPhone 14",
+      price: 79990,
+      color: "Фиолетовый",
+      imageURL: [
+        "https://trustereo.ru/upload/resize_cache/iblock/210/7dpelqydmpbd534excagwcvd2zetu5zd/1000_1000_0/image-1.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/d53/j30mfc14tzt1mbtnf2qghntacve2x6w2/1000_1000_0/image-2.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/4d5/x581xwdutcw56gmcxwn5eltz871an1kp/1000_1000_0/image-3.jpg",
+      ],
+      storage: 256,
+    },
+    {
+      id: 3,
+      name: "Apple iPhone 14",
+      price: 79990,
+      color: "Темная ночь",
+      imageURL: [
+        "https://trustereo.ru/upload/resize_cache/iblock/748/gi4fgbhky19w4wi5ydc8xtw98ngu1rxm/1000_1000_0/image-1.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/ae9/o2y17v389wvnks86e4ub9kdvrizeomim/1000_1000_0/image-2.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/b2f/ppkn51jwzcazgmne6dajl5mhypr28qxy/1000_1000_0/image-3.jpg",
+      ],
+      storage: 512,
+    },
+    {
+      id: 4,
       name: "Apple iPhone 13",
       price: 71990,
-      color: "color 4",
-      imageURL:
-        "https://trustereo.ru/upload/resize_cache/iblock/f50/p94luhfix8mibf0remph3ggl2gjal5if/1000_1000_0/image-1.jpg",
-      storage: 256,
-      id: "4",
-    },
-    {
-      name: "Apple iPhone 12",
-      price: 60990,
-      color: "color 5",
-      imageURL:
-        "https://trustereo.ru/upload/resize_cache/iblock/c50/jphk2qs14hji5hjpia5twrdkfxi59h9o/1000_1000_0/image-1.jpg",
-      storage: 64,
-      id: "5",
-    },
-    {
-      name: "Apple iPhone 12 Pro Max",
-      price: 92990,
-      color: "color 5",
-      imageURL:
-        "https://trustereo.ru/upload/iblock/82b/iacimopswutmgstdc2i3cniwq3zllfcr/image-1.jpeg",
+      color: "Сияющая звезда",
+      imageURL: [
+        "https://trustereo.ru/upload/resize_cache/iblock/b1d/jfwrdvn3703hwapd97822lsnzmebpj4x/1000_1000_0/image-1.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/281/8vc9lbgu18g7y6wwqnim59x4yrt7k2pv/1000_1000_0/image-2.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/2db/lwvsj3x8ke7umdazhf2hrt3oe836v7c8/1000_1000_0/image-3.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/7ee/1frl3220af7m94vgn5xj26pih24qbyqa/1000_1000_0/image-4.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/c5a/pt21w40nni5v36vcz8pyscs1qfcgtx73/1000_1000_0/image-5.jpg",
+      ],
       storage: 128,
-      id: "6",
+    },
+    {
+      id: 5,
+      name: "Apple iPhone 13",
+      price: 71990,
+      color: "Product RED",
+      imageURL: [
+        "https://trustereo.ru/upload/resize_cache/iblock/58f/o2xw4wc90ksvsn0ckyu9ttvom78caca4/1000_1000_0/image-1.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/95e/bl1oda3j1t3iwfm2wbayviq77c3zonur/1000_1000_0/image-2.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/b4a/6yw1hdj4u1mizm13vl2i1dsqpcy3ui93/1000_1000_0/image-3.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/9bf/8ijje05fq7yo7vukt1sj1gurqe7vx4sx/1000_1000_0/image-4.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/c98/ig37f0s4jkdgqu1m22ra3pfgu507xcin/1000_1000_0/image-5.jpg",
+      ],
+      storage: 128,
+    },
+    {
+      id: 6,
+      name: "Apple iPhone 13",
+      price: 76990.99,
+      color: "Зеленый",
+      imageURL: [
+        "https://trustereo.ru/upload/resize_cache/iblock/464/p2rjwh4i2tyejoo6qyv3ngjieaay6cc7/1000_1000_0/image-1.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/fe0/bawp9188ww96cc99pp6foqryrokmx9eb/1000_1000_0/image-2.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/846/8pkdwtsbkddy5typk8ad71wa7qj26htg/1000_1000_0/image-3.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/8e4/li1z11ii6p3qcrh5fb5d8m3sjal105fr/1000_1000_0/image-4.jpg",
+        "https://trustereo.ru/upload/resize_cache/iblock/913/h1ec8t9j31qusy8d01pocdzd9wop1z51/1000_1000_0/image-5.jpg",
+      ],
+      storage: 512,
     },
   ]);
   const [cartItems, setCartItems] = React.useState([]);
   const [favouriteItems, setFavouriteItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  
   // Добавление/Удаления из корзины
   const handleAddToCard = async (obj) => {
     const currentItem = cartItems.find((cartItem) => cartItem.id === obj.id);
@@ -183,7 +207,7 @@ function App() {
                   />
                 }
               />
-              <Route
+              {/* <Route
                 path="/cart"
                 element={
                   <CartPage
@@ -191,11 +215,11 @@ function App() {
                     fetchCartData={fetchCartData}
                     fetchFavouriteData={fetchFavouriteData}
                     handleAddToFavourite={handleAddToFavourite}
-                    cartItems={cartItems}
+                    // cartItems={cartItems}
                   />
                 }
-              />
-              <Route path="/product/:id" element={<PoductPage />} />
+              /> */}
+              <Route path="/product/:id" element={<ProductPage />} />
             </Routes>
           </div>
         </div>

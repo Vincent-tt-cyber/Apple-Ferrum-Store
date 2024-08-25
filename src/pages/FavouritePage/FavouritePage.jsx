@@ -5,7 +5,6 @@ import { AppContext } from "../../App";
 
 const FavouritePage = ({ handleAddToFavourite, handleAddToCard }) => {
   const { favouriteItems } = React.useContext(AppContext);
-  console.log(favouriteItems);
 
   React.useEffect(() => {}, [handleAddToFavourite, handleAddToCard]);
   return (

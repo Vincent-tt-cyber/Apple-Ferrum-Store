@@ -6,7 +6,7 @@ const DrawerCard = ({ product, deleteItemFromCart }) => {
   React.useEffect(() => {}, [deleteItemFromCart]);
   return (
     <div className={styles["drawer-card"]}>
-      <img src={product.imageURL} alt={product.name} />
+      <img src={product.imageURL[0]} alt={product.name} />
       <div>
         <h2 className={styles["drawer-card__title"]}>{product.name}</h2>
         <p>

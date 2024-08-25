@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "./CartPage.module.scss";
 import ProductCard from "../../components/ProductCard/ProductCard";
-const CartPage = ({ cartItems, handleAddToCard, handleAddToFavourite }) => {
+import { AppContext } from "../../App";
+const CartPage = ({  handleAddToCard, handleAddToFavourite }) => {
+  const { cartItems } = React.useContext(AppContext);
   
   return (
     <>

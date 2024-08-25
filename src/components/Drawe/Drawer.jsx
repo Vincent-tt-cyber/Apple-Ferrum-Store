@@ -67,13 +67,13 @@ const Drawer = ({ isOpenDrawer, setIsOpenDrawer, deleteItemFromCart }) => {
                     </b>
                   </li>
                 </ul>
-                <Link
+                <button
                   to="/cart"
                   onClick={() => setIsOpenDrawer(!isOpenDrawer)}
                   className={styles["drawer__button"]}
                 >
                   Оформить <IconsHandler icon={"arrow-right"} />
-                </Link>
+                </button>
               </>
             )}
           </div>

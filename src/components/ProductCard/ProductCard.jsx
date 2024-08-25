@@ -73,7 +73,7 @@ const ProductCard = ({
           </button>
           <img
             className={styles["card-image"]}
-            src={product.imageURL}
+            src={product.imageURL[0]}
             alt={product.name}
           />
           <Link to={`/product/${product.id}`}>
