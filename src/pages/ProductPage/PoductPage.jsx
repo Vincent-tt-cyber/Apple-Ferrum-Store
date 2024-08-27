@@ -1,11 +1,13 @@
 import React from "react";
 import styles from "./ProductPage.module.scss";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AppContext } from "../../App";
 
 const ProductPage = () => {
   const { id } = useParams();
   const { iphonesData } = React.useContext(AppContext);
+  const product = iphonesData.find((product) => product.id == id);
+  const [mainImage, setMainImage] = React.useState(product.imageURL[0]);
   // const [productInfo, setProductInfo] = React.useState([]);
   // const pathName = window.location.pathname;
 
@@ -14,6 +16,9 @@ const ProductPage = () => {
     <>
       <div className={styles["product-page"]}>
         <div className={styles["product-page__content"]}>
+          <Link to="/" className={styles["product-page__back"]}>
+            Назад
+          </Link>
           {iphonesData &&
             iphonesData.map((product) => {
               if (product.id == id) {
@@ -23,22 +28,33 @@ const ProductPage = () => {
                       <div className={styles["product-page__gallery"]}>
                         <div className={styles["product-page__gallery-slider"]}>
                           {product.imageURL.map((image) => (
-                            <img key={image} src={image} alt={product.name} />
+                            <img
+                              key={image}
+                              src={image}
+                              alt={product.name}
+                              onClick={() => setMainImage(image)}
+                            />
                           ))}
                         </div>
                         <div
                           className={styles["product-page__gallery-main-image"]}
                         >
-                          <img src={product.imageURL[0]} alt={product.name} />
+                          <img src={mainImage} alt={product.name} />
                         </div>
                       </div>
                       <div className={styles["product-page__info"]}>
-                        <h1>Модель: {product.name}</h1>
-                        <p>Цвет: {product.color}</p>
-                        <p>Объем памяти: {product.storage}GB</p>
-                        <div className={styles["product-page__info-price"]}>
-                          <p>Цена: {product.price}</p>
-                          <p></p>
+                        <div className={styles["product-page__info-item"]}>
+                          Модель:
+                          <h3>{product.name}</h3>
+                        </div>
+                        <div className={styles["product-page__info-item"]}>
+                          Цвет: <b>{product.color}</b>
+                        </div>
+                        <div className={styles["product-page__info-item"]}>
+                          Объем памяти: <b>{product.storage}GB</b>
+                        </div>
+                        <div className={styles["product-page__info-item"]}>
+                          Цена: <b>{product.price}</b>
                         </div>
                       </div>
                     </div>
