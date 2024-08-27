@@ -162,7 +162,6 @@ function App() {
   const handleAddToCard = async (obj) => {
     const currentItem = cartItems.find((cartItem) => cartItem.id === obj.id);
     const removeItem = cartItems.filter((cartItem) => cartItem.id !== obj.id);
-
     if (currentItem) {
       setCartItems(removeItem);
       await localStorage.setItem("cart", JSON.stringify(removeItem));
@@ -184,7 +183,6 @@ function App() {
   const fetchCartData = async () => {
     if (localStorage.getItem("cart")) {
       await setCartItems(JSON.parse(localStorage.getItem("cart")));
-      setIsLoading(false);
     }
   };
 
@@ -210,12 +208,10 @@ function App() {
   const fetchFavouriteData = async () => {
     if (localStorage.getItem("favourite")) {
       await setFavouriteItems(JSON.parse(localStorage.getItem("favourite")));
-      setIsLoading(false);
     }
   };
 
   React.useEffect(() => {
-    setIsLoading(true);
     fetchCartData();
     fetchFavouriteData();
 
