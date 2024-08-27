@@ -33,8 +33,10 @@ const Header = ({ isOpenDrawer, setIsOpenDrawer }) => {
               </Link>
             </li>
             <li className={styles["header-nav__item"]}>
+              <Link to="/user">
               <IconsHandler icon="user" />
               Войти
+              </Link>
             </li>
           </ul>
         </div>

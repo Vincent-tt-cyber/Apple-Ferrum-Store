@@ -9,6 +9,7 @@ import CartPage from "./pages/CartPage/CartPage";
 import FavouritePage from "./pages/FavouritePage/FavouritePage";
 import PoductPage from "./pages/ProductPage/PoductPage";
 import ProductPage from "./pages/ProductPage/PoductPage";
+import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 
 export const AppContext = React.createContext({});
 
@@ -282,6 +283,7 @@ function App() {
                 }
               /> */}
               <Route path="/product/:id" element={<ProductPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </div>
         </div>
