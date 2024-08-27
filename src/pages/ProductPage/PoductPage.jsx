@@ -8,6 +8,7 @@ const ProductPage = () => {
   const { iphonesData } = React.useContext(AppContext);
   const product = iphonesData.find((product) => product.id == id);
   const [mainImage, setMainImage] = React.useState(product.imageURL[0]);
+  const [isAdded, setIsAdded] = React.useState(false);
   // const [productInfo, setProductInfo] = React.useState([]);
   // const pathName = window.location.pathname;
 

@@ -5,7 +5,7 @@ import IconsHandler from "../../components/IconsHandler/IconsHandler";
 import { IoMdClose } from "react-icons/io";
 import OfferBlock from "../../components/OfferBlock/OfferBlock";
 import { AppContext } from "../../App";
-const MainPage = ({ handleAddToCard, handleAddToFavourite, isLoading }) => {
+const MainPage = ({ isLoading }) => {
   const { iphonesData } = React.useContext(AppContext);
   const [searchValue, setSearchValue] = React.useState("");
 
@@ -45,8 +45,6 @@ const MainPage = ({ handleAddToCard, handleAddToFavourite, isLoading }) => {
               <ProductCard
                 key={product.id}
                 product={product}
-                handleAddToCard={handleAddToCard}
-                handleAddToFavourite={handleAddToFavourite}
                 isLoading={isLoading}
               />
             ))}

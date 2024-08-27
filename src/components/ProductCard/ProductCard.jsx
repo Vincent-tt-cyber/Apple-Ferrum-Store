@@ -4,27 +4,24 @@ import { MdDone } from "react-icons/md";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
-const ProductCard = ({
-  product,
-  handleAddToCard,
-  handleAddToFavourite,
-  isLoading,
-}) => {
+import { AppContext } from "../../App";
+const ProductCard = ({ product, isLoading }) => {
   const [isAdded, setIsAdded] = React.useState(false);
   const [isLiked, setIsLiked] = React.useState(false);
+
+  const { handleAddToCard, handleAddToFavourite } =
+    React.useContext(AppContext);
 
   // console.log("Продукт из страницы КОРЗИНА => ", product);
 
   const onAddToFavourite = (product) => {
-    // console.log("onAddToFavourite", product);
-
     setIsLiked(!isLiked);
     handleAddToFavourite(product);
   };
 
   const onAddToCart = () => {
-    setIsAdded(!isAdded);
     handleAddToCard(product);
+    setIsAdded(!isAdded);
   };
 
   const isHasProduct = (id) => {

@@ -171,7 +171,7 @@ function App() {
 
   return (
     <>
-      <AppContext.Provider value={{ iphonesData, cartItems, favouriteItems }}>
+      <AppContext.Provider value={{ iphonesData, cartItems, favouriteItems, handleAddToCard, handleAddToFavourite }}>
         <div className="wrapper">
           {isOpenDrawer && (
             <Drawer
@@ -190,8 +190,6 @@ function App() {
                 path="/"
                 element={
                   <MainPage
-                    handleAddToCard={handleAddToCard}
-                    handleAddToFavourite={handleAddToFavourite}
                     fetchCartData={fetchCartData}
                     isLoading={isLoading}
                   />
