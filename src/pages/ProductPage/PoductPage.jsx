@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./ProductPage.module.scss";
 import { Link, useParams } from "react-router-dom";
 import { AppContext } from "../../App";
+import { Heart, ShoppingCart } from "lucide-react";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -9,10 +10,34 @@ const ProductPage = () => {
   const product = iphonesData.find((product) => product.id == id);
   const [mainImage, setMainImage] = React.useState(product.imageURL[0]);
   const [isAdded, setIsAdded] = React.useState(false);
-  // const [productInfo, setProductInfo] = React.useState([]);
-  // const pathName = window.location.pathname;
+  const [isLiked, setIsLiked] = React.useState(false);
 
-  React.useEffect(() => {}, [iphonesData]);
+  const { handleAddToCard, handleAddToFavourite } =
+    React.useContext(AppContext);
+
+  const isHasProduct = (id) => {
+    if (localStorage.getItem("cart")) {
+      const cartProducts = JSON.parse(localStorage.getItem("cart"));
+      // console.log("Procust => ", cartProducts);
+      const isHas = cartProducts.some((product) => product.id === id);
+
+      setIsAdded(isHas);
+    }
+  };
+
+  const isHasProductFavourite = (id) => {
+    if (localStorage.getItem("favourite")) {
+      const favouriteProducts = JSON.parse(localStorage.getItem("favourite"));
+      const isHas = favouriteProducts.some((product) => product.id === id);
+      // console.log("isHas", isHas);
+      setIsLiked(isHas);
+    }
+  };
+
+  React.useEffect(() => {
+    isHasProduct(product.id);
+    isHasProductFavourite(product.id);
+  }, [iphonesData, handleAddToCard, handleAddToFavourite]);
   return (
     <>
       <div className={styles["product-page"]}>
@@ -60,7 +85,43 @@ const ProductPage = () => {
                           Объем памяти: <b>{product.storage}GB</b>
                         </div>
                         <div className={styles["product-page__info-item"]}>
-                          Цена: <b>{product.price}</b>
+                          Цена:{" "}
+                          <b>
+                            {product.price.toLocaleString("ru-RU", {
+                              style: "currency",
+                              currency: "RUB",
+                            })}
+                          </b>
+                        </div>
+                        <div className={styles["product-page__buttons"]}>
+                          <button
+                            onClick={() => {
+                              handleAddToCard(product);
+                              setIsAdded(!isAdded);
+                            }}
+                            className={styles["product-page__button-cart"]}
+                          >
+                            <ShoppingCart />{" "}
+                            {isAdded ? (
+                              <span>Удалить из корзины</span>
+                            ) : (
+                              "Добавить в корзину"
+                            )}
+                          </button>
+                          <button
+                            onClick={() => {
+                              handleAddToFavourite(product);
+                              setIsLiked(!isLiked);
+                            }}
+                            className={styles["product-page__button-favorite"]}
+                          >
+                            <Heart />{" "}
+                            {isLiked ? (
+                              <span>Убрать из избранного</span>
+                            ) : (
+                              "Добавить в избранное"
+                            )}
+                          </button>
                         </div>
                       </div>
                     </div>
