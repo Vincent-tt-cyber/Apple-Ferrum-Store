@@ -33,6 +33,7 @@ const ProductPage = () => {
                               key={image}
                               src={image}
                               alt={product.name}
+                              draggable="false"
                               onClick={() => setMainImage(image)}
                             />
                           ))}
@@ -40,7 +41,11 @@ const ProductPage = () => {
                         <div
                           className={styles["product-page__gallery-main-image"]}
                         >
-                          <img src={mainImage} alt={product.name} />
+                          <img
+                            src={mainImage}
+                            draggable="false"
+                            alt={product.name}
+                          />
                         </div>
                       </div>
                       <div className={styles["product-page__info"]}>

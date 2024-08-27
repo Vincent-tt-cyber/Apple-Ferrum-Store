@@ -18,7 +18,6 @@ const MainPage = ({ isLoading }) => {
     setSearchValue("");
   };
 
-  // useEffect(() => {}, [handleAddToCard]);
   return (
     <>
       {/* <OfferBlock /> */}

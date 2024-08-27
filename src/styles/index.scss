@@ -4,11 +4,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+  -webkit-user-drag: none;
 }
 
 ul {
@@ -16,19 +21,21 @@ ul {
   margin: 0;
   padding: 0;
 }
-
 body {
   font-family: "Ubuntu", sans-serif;
   background-color: #e7f6ff;
   // overflow: hidden;
+  -ms-user-drag: none;
+  -webkit-user-drag: none;
+
   &::-webkit-scrollbar {
     width: 10px;
   }
-  
+
   &::-webkit-scrollbar-track {
     background-color: #fff;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background-color: #9dd458;
   }

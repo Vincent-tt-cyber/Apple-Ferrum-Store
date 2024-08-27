@@ -72,10 +72,12 @@ const ProductCard = ({ product, isLoading }) => {
             className={styles["card-image"]}
             src={product.imageURL[0]}
             alt={product.name}
+            draggable="false"
           />
           <Link to={`/product/${product.id}`}>
             <h3>
-              {product.name}, {product.storage + "ГБ"}
+              {product.name}
+              {/* {product.storage + "ГБ"} */}
             </h3>
           </Link>
           {/* <p>{product.color}</p> */}

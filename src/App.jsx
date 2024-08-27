@@ -96,6 +96,62 @@ function App() {
       ],
       storage: 512,
     },
+    {
+      id: 7,
+      name: "Apple iPhone 15 Pro Max",
+      price: 83900,
+      color: "Титановый белый",
+      imageURL: [
+        "https://trustereo.ru/upload/iblock/18e/4g5wdd6f4mkntw5bj0nkt50j1azdondl/roz.png",
+        "https://trustereo.ru/upload/resize_cache/iblock/53c/yk06bqw5qlh2rupjpl2pn6rn39mkyi7d/1000_1000_0/dsq.png",
+        "https://trustereo.ru/upload/resize_cache/iblock/838/brfl8cmh64f55rj1212o9qb687qgvrkt/1000_1000_0/vgm.png",
+        "https://trustereo.ru/upload/resize_cache/iblock/b4f/wzl03lo7m18s7neihhedw8dykpkzxeh4/1000_1000_0/ongs.png",
+        "https://trustereo.ru/upload/resize_cache/iblock/59f/z1hhijiqn9dnjy2mbsma6jitmfdqz27l/1000_1000_0/sy.png",
+      ],
+      storage: 256,
+    },
+    {
+      id: 8,
+      name: "Apple iPhone 15 Pro Max",
+      price: 99900,
+      color: "Титановый синий",
+      imageURL: [
+        "https://trustereo.ru/upload/iblock/436/aa5fer7t1148trmetfmii2qz3b0z0xib/n0riox3i0t7vnp8b4puk943l8y138mwx.png",
+        "https://trustereo.ru/upload/resize_cache/iblock/d8e/pj3vklfraiqgbk50hpres4c3zcn9d927/1000_1000_0/irsdiiy88fskl5nu241jo41yibujp3qe.png",
+        "https://trustereo.ru/upload/resize_cache/iblock/ac4/eme8yxxc0cbkmbl91cyaq7hikhqug6qs/1000_1000_0/odd99jlw1jrw0yysr4fnc14nhq7m4pq0.png",
+        "https://trustereo.ru/upload/resize_cache/iblock/247/x5c77jqy76rhdggeuj0rof76o01bq4au/1000_1000_0/sav36cjquw4jlsxmtesciccpg73132jb.png",
+        "https://trustereo.ru/upload/resize_cache/iblock/59f/z1hhijiqn9dnjy2mbsma6jitmfdqz27l/1000_1000_0/sy.png",
+      ],
+      storage: 512,
+    },
+    {
+      id: 9,
+      name: "Apple iPhone 15 Pro Max",
+      price: 99900,
+      color: "Титановый бежевый",
+      imageURL: [
+        "https://trustereo.ru/upload/iblock/76a/hoqd9dyoe2ktlilt1kkr10ua6e2bnfj8/kmghepd0m3xl1yj1o86it2wjunied78b.png",
+        "https://trustereo.ru/upload/resize_cache/iblock/678/g0uc5ueskm18drbqtwkbvjch6qgec1qe/1000_1000_0/aidkrwp2c5t02zjnzjnqzvli4t0civhi.png",
+        "https://trustereo.ru/upload/resize_cache/iblock/4b4/1x2aw1ol6o508ikyv7yl14mxs1l506fn/1000_1000_0/kttesbwxuzzzydiq706mx56mdvbf34lx.png",
+        "https://trustereo.ru/upload/resize_cache/iblock/781/b1naqyu8fmy5wq2nr8n4p5q8282bdbdf/1000_1000_0/l9fyrft2s31afc9xv3n7gdcteh1gmq8d.png",
+        "https://trustereo.ru/upload/resize_cache/iblock/59f/z1hhijiqn9dnjy2mbsma6jitmfdqz27l/1000_1000_0/sy.png",
+      ],
+      storage: 512,
+    },
+    {
+      id: 10,
+      name: "Apple iPhone 15 Pro Max",
+      price: 83900,
+      color: "Титановый черный",
+      imageURL: [
+        "https://trustereo.ru/upload/iblock/970/49b18vav9usjpmlyvib4yrstle4ka7yh/t0agv6uu9z3rkemicunwuxv0343kki0i.jpg",
+        "https://trustereo.ru/upload/iblock/747/9xp035s2dtrt7q0of1l6gi2feled7p3g/xupi5qma5iv3ud55fps02px1pdik3yho.jpg",
+        "https://trustereo.ru/upload/iblock/4db/ujjpfrmx9jmkp17as07ocalr02z36vp4/dwdvxs0ox4cc8xaxr3gsgyg5j825k73g.jpg",
+        "https://trustereo.ru/upload/iblock/2f3/0r5onq0rub2lk7zafy40oc35672zzzxt/vimbzgvv31g3zor82l36ghtoj7yko2e0.jpg",
+        "https://trustereo.ru/upload/iblock/3bd/c1k0hdiqj9v2bwzc4s9djnh03e7g7ina/sy1k7wfq8lpgysqg58plstkd9yx8mn50.jpg",
+      ],
+      storage: 256,
+    },
   ]);
   const [cartItems, setCartItems] = React.useState([]);
   const [favouriteItems, setFavouriteItems] = React.useState([]);
@@ -171,7 +227,15 @@ function App() {
 
   return (
     <>
-      <AppContext.Provider value={{ iphonesData, cartItems, favouriteItems, handleAddToCard, handleAddToFavourite }}>
+      <AppContext.Provider
+        value={{
+          iphonesData,
+          cartItems,
+          favouriteItems,
+          handleAddToCard,
+          handleAddToFavourite,
+        }}
+      >
         <div className="wrapper">
           {isOpenDrawer && (
             <Drawer
