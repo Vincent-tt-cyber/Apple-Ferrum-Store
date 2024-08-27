@@ -99,7 +99,11 @@ const ProductPage = () => {
                               handleAddToCard(product);
                               setIsAdded(!isAdded);
                             }}
-                            className={styles["product-page__button-cart"]}
+                            className={
+                              isAdded
+                                ? styles["product-page__button-cart-active"]
+                                : styles["product-page__button-cart"]
+                            }
                           >
                             <ShoppingCart />{" "}
                             {isAdded ? (
@@ -113,7 +117,7 @@ const ProductPage = () => {
                               handleAddToFavourite(product);
                               setIsLiked(!isLiked);
                             }}
-                            className={styles["product-page__button-favorite"]}
+                            className={ isLiked ? styles["product-page__button-favorite-active"] : styles["product-page__button-favorite"]}
                           >
                             <Heart />{" "}
                             {isLiked ? (
