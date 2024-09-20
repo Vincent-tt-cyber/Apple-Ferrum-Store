@@ -16,7 +16,7 @@ export const AppContext = React.createContext({});
 function App() {
   // FIXME: https://youtu.be/2jLFTiytfgg?list=PL0FGkDGJQjJEos_0yVkbKjsQ9zGVy3dG7&t=6402
   // TODO: адаптировать проект под телефоны
-
+  const [sortType, setSortType] = React.useState("all");
   const [isOpenDrawer, setIsOpenDrawer] = React.useState(!true);
   const [iphonesData, setIphonesData] = React.useState([
     {
@@ -153,10 +153,46 @@ function App() {
       ],
       storage: 256,
     },
+    {
+      id: 11,
+      name: "Apple iPhone 12 Pro Max",
+      price: 44990,
+      color: "Титановый черный",
+      imageURL: [
+        "https://trustereo.ru/upload/iblock/82b/iacimopswutmgstdc2i3cniwq3zllfcr/image-1.jpeg",
+        "https://trustereo.ru/upload/iblock/57d/npsvwazvswp865ytfdq6iqay5nz399b4/image-2.jpeg",
+        "https://trustereo.ru/upload/iblock/e3b/707v0ngqowwoxdmg0j87kqju7f8c51aa/image-3.jpeg",
+        "https://trustereo.ru/upload/iblock/33c/v2qqi4cvlj582qvrbvbmftwvwj0oeljg/image-4.jpeg",
+      ],
+      storage: 128,
+    },
   ]);
   const [cartItems, setCartItems] = React.useState([]);
   const [favouriteItems, setFavouriteItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
+
+  // Сортровка товаров
+  const handleSort = (type) => {
+    const sortFunctions = {
+      all: () => [...iphonesData].sort((a, b) => a.id - b.id),
+      cheap: () => [...iphonesData].sort((a, b) => a.price - b.price),
+      expensive: () => [...iphonesData].sort((a, b) => b.price - a.price),
+    };
+
+    setSortType(type);
+    setIphonesData(sortFunctions[type]());
+
+    // if (type == "all") {
+    //   setSortType(type);
+    //   setIphonesData([...iphonesData].sort((a, b) => a.id - b.id));
+    // } else if (type == "cheap") {
+    //   setSortType(type);
+    //   setIphonesData([...iphonesData].sort((a, b) => a.price - b.price));
+    // } else if (type == "expensive") {
+    //   setSortType(type);
+    //   setIphonesData([...iphonesData].sort((a, b) => b.price - a.price));
+    // }
+  };
 
   // Добавление/Удаления из корзины
   const handleAddToCard = async (obj) => {
@@ -186,7 +222,6 @@ function App() {
     }
   };
 
-  // FIXME: Логика добавления в избранное
 
   const handleAddToFavourite = async (obj) => {
     const currentItem = favouriteItems.find(
@@ -220,7 +255,7 @@ function App() {
     } else {
       document.body.style.overflow = "auto";
     }
-  }, [isOpenDrawer]);
+  }, [isOpenDrawer, sortType]);
 
   return (
     <>
@@ -231,6 +266,8 @@ function App() {
           favouriteItems,
           handleAddToCard,
           handleAddToFavourite,
+          sortType,
+          handleSort
         }}
       >
         <div className="wrapper">
@@ -246,6 +283,15 @@ function App() {
               isOpenDrawer={isOpenDrawer}
               setIsOpenDrawer={setIsOpenDrawer}
             />
+            {/* <select
+              // className={styles.}
+              onChange={(e) => handleSort(e.target.value)}
+              value={sortType}
+            >
+              <option value="all">Все</option>
+              <option value="cheap">Дешевле</option>
+              <option value="expensive">Дороже</option>
+            </select> */}
             <Routes>
               <Route
                 path="/"

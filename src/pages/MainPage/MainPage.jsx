@@ -6,7 +6,7 @@ import { IoMdClose } from "react-icons/io";
 import OfferBlock from "../../components/OfferBlock/OfferBlock";
 import { AppContext } from "../../App";
 const MainPage = ({ isLoading }) => {
-  const { iphonesData } = React.useContext(AppContext);
+  const { iphonesData, sortType, handleSort } = React.useContext(AppContext);
   const [searchValue, setSearchValue] = React.useState("");
 
   const onChangeSearchInput = (event) => {
@@ -24,6 +24,15 @@ const MainPage = ({ isLoading }) => {
       <div className={styles["main-page"]}>
         <div className={styles["main-page-header"]}>
           <h1 className={styles["main-page-title"]}>Все iPhone</h1>
+          <select
+              // className={styles.}
+              onChange={(e) => handleSort(e.target.value)}
+              value={sortType}
+            >
+              <option className={styles['option']} value="all">Все</option>
+              <option className={styles['option']} value="cheap">Дешевле</option>
+              <option className={styles['option']} value="expensive">Дороже</option>
+            </select>
           <div className={styles["main-page-search"]}>
             <IconsHandler icon="search" />
             <input
